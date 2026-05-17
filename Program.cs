@@ -32,7 +32,7 @@ namespace MonitoringServer
             try
             {
                 tcpListener.Start(); // запуск мониторинг сервера
-                Console.WriteLine($"Мониторинг сервер начал работу {ipAddress.ToString()}:{port}\n");
+                Console.WriteLine($"Мониторинг сервер начал работу {ipAddress.ToString()}:{port} ({DateTime.UtcNow})\n");
 
                 while (true)
                 {
@@ -40,7 +40,7 @@ namespace MonitoringServer
 
                     try
                     {
-                        Console.WriteLine($"Подключился клиент: {tcpClient.Client.RemoteEndPoint}");
+                        Console.WriteLine($"Подключился клиент: ({DateTime.UtcNow}) {tcpClient.Client.RemoteEndPoint}");
 
                         StringBuilder message = new StringBuilder(); // используется для формирования ответа сервера
                         bool isStopped = false; // переменная, которая позволяет клиенту отключиться 
@@ -83,12 +83,12 @@ namespace MonitoringServer
                                 message.Clear(); // зачищаем переменную, чтобы данные не перемешались с предыдущими
                             }
 
-                            Console.WriteLine($"Клиент был отключен: {tcpClient.Client.RemoteEndPoint}");
+                            Console.WriteLine($"Клиент был отключен: ({DateTime.UtcNow}) {tcpClient.Client.RemoteEndPoint}");
                         }
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                        Console.WriteLine($"Произошла ошибка: ({DateTime.UtcNow}) {ex.Message}");
                     }
                     finally
                     {
@@ -98,12 +98,12 @@ namespace MonitoringServer
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                Console.WriteLine($"Произошла ошибка: ({DateTime.UtcNow}) {ex.Message}");
             }
             finally
             {
                 tcpListener.Stop();
-                Console.WriteLine($"Сервер закончил работу {ipAddress.ToString()}:{port}");
+                Console.WriteLine($"Сервер закончил работу ({DateTime.UtcNow}) {ipAddress.ToString()}:{port}");
             }
 
         }

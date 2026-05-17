@@ -36,7 +36,7 @@
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Произошла ошибка: {ex.Message}");
+                Console.WriteLine($"Произошла ошибка: {ServerId} ({DateTime.UtcNow}) {ex.Message}");
             }
             finally { IsEnabled = false; }
         }
